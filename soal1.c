@@ -41,18 +41,18 @@ void PrintMaxVertex(int idMaks){
 
 // Prosedur Print Isolated (Vertex tanpa degree)
 void PrintIsolated(int N, int degree[]){
-    // Jika tidak terisolasi makas isolated = 1, jika terisolasi maka isolated = 0
-    int isolated = 1;
+    // Jika terisolasi makas isolated = 1, jika tidak maka isolated = 0
+    int isolated = 0;
     printf("ISOLATED");
     // Cari vertex yang terisolasi
     for (int i = 0 ; i<N; i++){
         if (degree[i]==0){
             printf(" %d", i);
-            isolated = 0; // Ubah menjadi 0 jika vertex terisolasi
+            isolated = 1; // Ubah menjadi 1 jika vertex terisolasi
         }
     }
     // Jika tidak ada yang terisolasi, maka print NONE
-    if (isolated) printf(" NONE");
+    if (!isolated) printf(" NONE");
 }
 
 
