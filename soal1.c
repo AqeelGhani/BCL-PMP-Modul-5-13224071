@@ -6,39 +6,52 @@
  *   Deskripsi           : Membaca peta fasilitas bawah tanah dengan menghitung derajat setiap simpul, simpul maksimum, dan simpul terisolasi
  * 
  */
-
+// Penambahan standard input output
 #include <stdio.h>
 
+// Prosedur Scan Input (Membaca Degree Tiap vertex dan mencari max vertex)
 void ScanInput(int N, int degree[], int *idMaks){
     for(int i = 0; i<N; i++){
+        // Inisialisasi degree tiap vertex
         degree[i] = 0;
         for(int j = 0; j<N; j++){
             int temp;
+            // membaca adjency matrix
             scanf(" %d", &temp);
+            // Menghitung degree vertex
             degree[i] += temp;
             
-            *idMaks = (degree[*idMaks]< degree[i]) ? i : *idMaks;
         }
+        // Jika Degree vertex lebih besar dibanding vertex dengan degree sebelumnya akan di masukan indeks vertex yang baru
+        *idMaks = (degree[*idMaks]< degree[i]) ? i : *idMaks;
     }
 }
 
+// Prosedur Print Degree
 void PrintDegree(int N, int degree[]){
+    // Print Degree Tiap Vertex
     for (int i = 0 ; i<N; i++) printf("DEGREE %d %d\n", i, degree[i]);
 }
 
+// Prosedure Print Max Vertex
 void PrintMaxVertex(int idMaks){
+    // Print indeks Max vertex
     printf("MAX_VERTEX %d\n", idMaks);
 }
 
+// Prosedur Print Isolated (Vertex tanpa degree)
 void PrintIsolated(int N, int degree[]){
+    // Jika tidak terisolasi makas isolated = 1, jika terisolasi maka isolated = 0
     int isolated = 1;
     printf("ISOLATED");
+    // Cari vertex yang terisolasi
     for (int i = 0 ; i<N; i++){
         if (degree[i]==0){
             printf(" %d", i);
-            isolated = 0;
+            isolated = 0; // Ubah menjadi 0 jika vertex terisolasi
         }
     }
+    // Jika tidak ada yang terisolasi, maka print NONE
     if (isolated) printf(" NONE");
 }
 
@@ -47,7 +60,7 @@ void PrintIsolated(int N, int degree[]){
 int main(void) {
     int N;
     scanf("%d", &N);
-    int degree[N], idMaks;
+    int degree[N], idMaks = 0;
 
     ScanInput(N, degree, &idMaks);
     PrintDegree(N, degree);
